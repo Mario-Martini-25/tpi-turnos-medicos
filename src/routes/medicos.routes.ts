@@ -22,6 +22,28 @@ router.get("/", async (_req, res) => {
   res.json(medicos);
 });
 
+// Busqueda por ID
+router.get("/:id", async (req, res) => {
+  try {
+    const medico = await Medico.findOne({
+      _id: req.params.id,
+      activo: true
+    });
+
+    if (!medico) {
+      return res.status(404).json({
+        error: "Médico no encontrado"
+      });
+    }
+
+    res.json(medico);
+  } catch {
+    res.status(400).json({
+      error: "ID inválido"
+    });
+  }
+});
+
 router.patch("/:id", async (req, res) => {
   const medico = await Medico.findOneAndUpdate(
     {

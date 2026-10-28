@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -13,17 +15,14 @@
   "dependencies": {
     "dotenv": "^18.0.9",
     "express": "^5.3.0",
+    "inquirer": "^14.2.5",
     "mongoose": "^9.11.4"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
+    "@types/inquirer": "^9.0.10",
     "@types/node": "^26.6.5",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
-  },
-  "scripts": {
-  "dev": "tsx watch src/index.ts",
-  "start": "tsx src/index.ts",
-  "build": "tsc"
   }
 }
