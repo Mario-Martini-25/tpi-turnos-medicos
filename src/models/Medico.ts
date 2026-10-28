@@ -5,19 +5,22 @@ const medicoSchema = new Schema(
     nombre: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      match: [/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/, "El nombre debe contener solo letras y espacios"]
     },
 
     apellido: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      match: [/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/, "El apellido debe contener solo letras y espacios"]
     },
 
     matricula: {
       numero: {
         type: String,
-        required: true
+        required: true,
+        trim: true
       },
 
       tipo: {
@@ -38,21 +41,30 @@ const medicoSchema = new Schema(
 
     disponibilidad: [
       {
-        dia: String,
-        horaDesde: String,
-        horaHasta: String
+        dia: { type: String, trim: true },
+        horaDesde: { 
+          type: String, 
+          match: [/^([01]\d|2[0-3]):([0-5]\d)$/, "El formato debe ser HH:mm (ej. 09:30)"] 
+        },
+        horaHasta: { 
+          type: String, 
+          match: [/^([01]\d|2[0-3]):([0-5]\d)$/, "El formato debe ser HH:mm (ej. 13:00)"] 
+        }
       }
     ],
 
     obrasSocialesAceptadas: [
       {
-        type: String
+        type: String,
+        trim: true
       }
     ],
 
     contacto: {
       telefono: String,
-      email: String
+      email: String,
+      match: [/^[0-9\-+ ]+$/, "El teléfono solo admite números, guiones y el signo +"],
+      trim: true
     },
 
     activo: {

@@ -70,6 +70,28 @@ router.get("/", async (_req, res) => {
   res.json(turnos);
 });
 
+// Busqueda por ID
+router.get("/:id", async (req, res) => {
+  try {
+    const turno = await Turno.findOne({
+      _id: req.params.id,
+      activo: true
+    });
+
+    if (!turno) {
+      return res.status(404).json({
+        error: "Paciente no encontrado"
+      });
+    }
+
+    res.json(turno);
+  } catch {
+    res.status(400).json({
+      error: "ID inválido"
+    });
+  }
+});
+
 // Update
 router.patch("/:id", async (req, res) => {
   const turno = await Turno.findOneAndUpdate(
